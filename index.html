@@ -57,9 +57,8 @@
         }
         
         .title {
-            color: black;
-            font-weight: bold;
             font-size: 16px;
+            color: #171eaa;
             margin-bottom: 15px;
         }
         
@@ -99,46 +98,141 @@
             height: 19px;
             margin-right: 8px;
         }
+        /* Минималистичный dropdown под стиль документа */
+        
+        .contact-dropdown {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .contact-toggle {
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: bold;
+            color: #171eaa;
+            text-decoration: underline;
+        }
+        
+        .contact-toggle img {
+            width: 21px;
+            height: 21px;
+            margin-right: 8px;
+        }
+        
+        .contact-toggle .chevron {
+            font-size: 9px;
+            margin-left: 4px;
+        }
+        
+        .dropdown-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 12px;
+            margin-top: 2px;
+            color: #171eaa;
+        }
+        
+        .dropdown-menu[hidden] {
+            display: none;
+        }
+        
+        .dropdown-menu a {
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            text-decoration: none;
+            color: #171eaa;
+        }
+        
+        .dropdown-menu a:hover {
+            text-decoration: underline;
+        }
+        
+        .dropdown-divider {
+            opacity: 0.5;
+        }
     </style>
 </head>
 
 <body>
     <div class="rada">
-        <img src="rada.png" alt="rada">
+        <img src="rada.png" alt="Rada">
     </div>
+
     <div class="card">
         <img src="mainimg.jpg" alt="Profile Picture" class="profile-pic">
         <div class="name">Daryna Sadova</div>
-        <div class="title">Advisor for International Affairs</div>
-        <div class="text">to Member of Parliament of Ukraine,
+        <div class="title">Assistant and Advisor for International Affairs</div>
+        <div class="text">
+            to Member of Parliament of Ukraine,
             <br>Mr. Serhii Nahorniak</br>
         </div>
+
         <div class="contact-info">
-            <a href="https://wa.me/380992022004">
-                <img src="whatsapp-icon.png" alt="WhatsApp">+380 99 202 2004
-            </a>
+            <!-- Номер + минималистичный выбор -->
+            <div class="contact-dropdown">
+                <button class="contact-toggle" type="button" onclick="toggleMenu()">
+                <img src="whatsapp-icon.png" alt="WhatsApp">
+                +380 99 202 2004
+            </button>
+                <div id="contactMenu" class="dropdown-menu" hidden>
+                    <a href="https://wa.me/380992022004" target="_blank">WhatsApp</a>
+                    <span class="dropdown-divider">•</span>
+                    <a href="tel:+380992022004">Call</a>
+                </div>
+            </div>
+
             <a href="mailto:sadova.d.y@gmail.com">
                 <img src="email-icon.png" alt="email">sadova.d.y@gmail.com
             </a>
+
             <div class="contact-info-facebook">
                 <a href="https://www.facebook.com/share/17d7Hf1QDd/?mibextid=wwXIfr">
-                    <img src="facebook-icon.png" alt="WhatsApp">Facebook
+                    <img src="facebook-icon.png" alt="Facebook">Facebook
                 </a>
             </div>
+
             <div class="contact-info-instagram">
                 <a href="https://www.instagram.com/daryna.sadova?igsh=ZzRwY3dkeDhwOHRz&utm_source=qr">
-                    <img src="instagram-icon.png" alt="email">Instagram
+                    <img src="instagram-icon.png" alt="Instagram">Instagram
                 </a>
             </div>
-
-
         </div>
     </div>
+
     <div class="Verkhovna">
-        <img src="Verkhovna.png" alt="Verkhovna">
+        <img src="Verkhovna.png" alt="Verkhovna Rada">
     </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('contactMenu');
+            if (!menu) return;
+            menu.hidden = !menu.hidden;
+        }
+
+        // Закрытие при клике вне
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.contact-dropdown');
+            const menu = document.getElementById('contactMenu');
+            if (!dropdown || !menu) return;
+            if (!dropdown.contains(event.target)) {
+                menu.hidden = true;
+            }
+        });
+    </script>
 </body>
 
-
 </html>
-
